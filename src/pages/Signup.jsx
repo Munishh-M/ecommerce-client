@@ -15,7 +15,7 @@ function Signup() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/register', form);
+      const { data } = await axios.post(`${API_URL}/api/auth/register`, form);
       login(data);
       navigate('/');
     } catch (err) {
