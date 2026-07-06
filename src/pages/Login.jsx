@@ -15,7 +15,7 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/login', form);
+      const { data } = await axios.post(`${API_URL}/api/auth/login`, form);
       login(data);
       navigate('/');
     } catch (err) {
