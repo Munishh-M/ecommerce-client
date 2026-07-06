@@ -1,3 +1,4 @@
+import API_URL from '../config';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -18,7 +19,8 @@ function AdminDashboard() {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/products');
+      const { data } = axios.get(`${API_URL}/api/products`)
+
       setProducts(data);
     } catch (err) { console.log(err); }
   };
@@ -29,7 +31,7 @@ function AdminDashboard() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/products', form, config);
+      axios.post(`${API_URL}/api/products`, form, config)
       setMessage({ text: '✅ Product added successfully!', type: 'success' });
       setForm({ name: '', description: '', price: '', imageUrl: '', category: '', stock: '' });
       fetchProducts();
@@ -43,7 +45,7 @@ function AdminDashboard() {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this product?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+      axios.delete(`${API_URL}/api/products/${id}`, config)
       fetchProducts();
     } catch (err) { console.log(err); }
   };
