@@ -1,3 +1,4 @@
+import API_URL from '../config';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
@@ -14,7 +15,7 @@ function Shop() {
   const categories = ['All', 'Electronics', 'Fashion', 'Home & Living', 'Kitchen', 'Beauty', 'Books'];
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/products')
+    axios.get(`${API_URL}/api/products`)
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   }, []);
